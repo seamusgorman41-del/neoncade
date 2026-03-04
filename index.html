@@ -7,14 +7,24 @@
   </head>
   <body>
     <div id="root">
-      <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif; flex-direction: column;">
-        <h1 style="font-size: 2rem; margin-bottom: 1rem; letter-spacing: -0.05em;">NEON ARCADE</h1>
-        <div style="width: 30px; height: 30px; border: 2px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-        <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">BOOTING CORE SYSTEMS...</p>
+      <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: monospace; flex-direction: column; text-align: center; padding: 20px;">
+        <h1 style="font-size: 1.5rem; margin-bottom: 1rem; border: 1px solid #00FF00; padding: 10px;">NEON_ARCADE_v1.0.4</h1>
+        <div style="width: 40px; height: 40px; border: 3px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 1.5rem; letter-spacing: 2px;">INITIALIZING_CORE_SYSTEMS...</p>
+        <div id="error-display" style="display: none; margin-top: 2rem; color: #ff4444; text-align: left; background: rgba(255,0,0,0.1); padding: 15px; border: 1px solid #ff4444; max-width: 600px; font-size: 12px; overflow: auto;">
+          <p style="font-weight: bold; margin-bottom: 5px;">SYSTEM_FAILURE_DETECTED:</p>
+          <pre id="error-text" style="white-space: pre-wrap;"></pre>
+        </div>
       </div>
     </div>
     <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
-    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.onerror = function(msg, url, line, col, error) {
+        document.getElementById('error-display').style.display = 'block';
+        document.getElementById('error-text').innerText += '\n' + msg + ' (' + url + ':' + line + ')';
+      };
+    </script>
+    <script type="module" src="./src/main.jsx"></script>
   </body>
 </html>
 
