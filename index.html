@@ -7,19 +7,14 @@
   </head>
   <body>
     <div id="root">
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif;">
-        <p>Loading Arcade Systems...</p>
+      <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif; flex-direction: column;">
+        <h1 style="font-size: 2rem; margin-bottom: 1rem; letter-spacing: -0.05em;">NEON ARCADE</h1>
+        <div style="width: 30px; height: 30px; border: 2px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">BOOTING CORE SYSTEMS...</p>
       </div>
     </div>
-    <script type="module" src="src/main.jsx"></script>
-    <script>
-      // Fallback check: if React hasn't rendered in 5 seconds, show a manual refresh hint
-      setTimeout(() => {
-        if (document.getElementById('root').innerHTML.includes('Loading Arcade Systems')) {
-          console.warn('Neon Arcade: App taking too long to load. Check console for errors.');
-        }
-      }, 5000);
-    </script>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
 

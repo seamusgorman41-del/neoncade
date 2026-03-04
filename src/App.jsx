@@ -11,9 +11,11 @@ export default function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
+    console.log('Neon Arcade: Loading games data...');
     try {
       if (gamesData && Array.isArray(gamesData)) {
         setGames(gamesData);
+        console.log(`Neon Arcade: Successfully loaded ${gamesData.length} games.`);
       } else {
         console.error('Neon Arcade: Invalid games data format');
       }
