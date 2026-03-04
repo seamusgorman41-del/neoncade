@@ -5,26 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
   </head>
-  <body>
+  <body style="margin: 0; background: #0a0a0a;">
     <div id="root">
-      <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: monospace; flex-direction: column; text-align: center; padding: 20px;">
-        <h1 style="font-size: 1.5rem; margin-bottom: 1rem; border: 1px solid #00FF00; padding: 10px;">NEON_ARCADE_v1.0.4</h1>
-        <div style="width: 40px; height: 40px; border: 3px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-        <p style="margin-top: 1.5rem; letter-spacing: 2px;">INITIALIZING_CORE_SYSTEMS...</p>
-        <div id="error-display" style="display: none; margin-top: 2rem; color: #ff4444; text-align: left; background: rgba(255,0,0,0.1); padding: 15px; border: 1px solid #ff4444; max-width: 600px; font-size: 12px; overflow: auto;">
-          <p style="font-weight: bold; margin-bottom: 5px;">SYSTEM_FAILURE_DETECTED:</p>
-          <pre id="error-text" style="white-space: pre-wrap;"></pre>
-        </div>
+      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; color: #00FF00; font-family: monospace; flex-direction: column;">
+        <h1 style="font-size: 1.5rem; margin-bottom: 1rem;">NEON_ARCADE_v1.0.5</h1>
+        <div style="width: 30px; height: 30px; border: 2px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 1rem; opacity: 0.5;">SYSTEM_BOOT_SEQUENCE_ACTIVE</p>
       </div>
     </div>
+    
+    <!-- PERSISTENT DEBUG CONSOLE -->
+    <div id="debug-log" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); color: #00FF00; font-family: monospace; font-size: 10px; padding: 10px; border-top: 1px solid #333; z-index: 9999; max-height: 100px; overflow-y: auto; pointer-events: none;">
+      <div>[SYSTEM] WAITING_FOR_JAVASCRIPT_ENTRY...</div>
+    </div>
+
     <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+    
     <script>
-      window.onerror = function(msg, url, line, col, error) {
-        document.getElementById('error-display').style.display = 'block';
-        document.getElementById('error-text').innerText += '\n' + msg + ' (' + url + ':' + line + ')';
+      const log = (msg) => {
+        const div = document.createElement('div');
+        div.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+        document.getElementById('debug-log').appendChild(div);
+        console.log(msg);
       };
+      window.onerror = (m, u, l) => log(`ERROR: ${m} at ${l}`);
+      log('HTML_LOADED_SUCCESSFULLY');
     </script>
-    <script type="module" src="./src/main.jsx"></script>
+    
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
 

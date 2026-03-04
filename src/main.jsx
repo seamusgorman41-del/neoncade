@@ -3,27 +3,36 @@ import {createRoot} from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 
-console.log('Neon Arcade: Bootstrap starting...');
+const log = (msg) => {
+  const debugLog = document.getElementById('debug-log');
+  if (debugLog) {
+    const div = document.createElement('div');
+    div.innerText = `[JS_MAIN] ${msg}`;
+    debugLog.appendChild(div);
+  }
+  console.log(`[JS_MAIN] ${msg}`);
+};
+
+log('Bootstrap starting...');
 
 try {
   const rootElement = document.getElementById('root');
   if (!rootElement) {
+    log('CRITICAL: Root element #root not found');
     throw new Error('Root element #root not found in DOM');
   }
 
+  log('Creating React root...');
   const root = createRoot(rootElement);
+  
+  log('Rendering App...');
   root.render(
     <StrictMode>
       <App />
     </StrictMode>
   );
-  console.log('Neon Arcade: Render call completed');
+  log('Render call completed.');
 } catch (error) {
+  log(`CRITICAL_ERROR: ${error.message}`);
   console.error('Neon Arcade: Critical boot error:', error);
-  document.body.innerHTML = `
-    <div style="background: #000; color: #f00; padding: 20px; font-family: monospace;">
-      <h1>CRITICAL BOOT ERROR</h1>
-      <pre>${error.stack || error.message}</pre>
-    </div>
-  `;
 }
