@@ -6,9 +6,20 @@
     <title>My Google AI Studio App</title>
   </head>
   <body>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root">
+      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif;">
+        <p>Loading Arcade Systems...</p>
+      </div>
+    </div>
+    <script type="module" src="src/main.jsx"></script>
+    <script>
+      // Fallback check: if React hasn't rendered in 5 seconds, show a manual refresh hint
+      setTimeout(() => {
+        if (document.getElementById('root').innerHTML.includes('Loading Arcade Systems')) {
+          console.warn('Neon Arcade: App taking too long to load. Check console for errors.');
+        }
+      }, 5000);
+    </script>
   </body>
 </html>
 
