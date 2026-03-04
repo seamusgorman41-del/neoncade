@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import gamesData from './games.json';
 
 export default function App() {
+  console.log('Neon Arcade: App component rendering...');
   const [games, setGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGame, setSelectedGame] = useState(null);

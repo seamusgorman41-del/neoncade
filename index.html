@@ -6,15 +6,39 @@
     <title>My Google AI Studio App</title>
   </head>
   <body>
+    <script>
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        var debug = document.getElementById('debug-info');
+        if (debug) {
+          debug.style.display = 'block';
+          debug.innerHTML += '<p style="color: #ff4444; margin-top: 0.5rem;">Error: ' + msg + ' at ' + lineNo + ':' + columnNo + '</p>';
+        }
+        return false;
+      };
+      window.addEventListener('unhandledrejection', function(event) {
+        var debug = document.getElementById('debug-info');
+        if (debug) {
+          debug.style.display = 'block';
+          debug.innerHTML += '<p style="color: #ff4444; margin-top: 0.5rem;">Promise Rejection: ' + event.reason + '</p>';
+        }
+      });
+    </script>
     <div id="root">
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif;">
+      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0a0a; color: #00FF00; font-family: sans-serif; flex-direction: column; padding: 2rem;">
         <div style="text-align: center;">
-          <h1 style="font-size: 2rem; margin-bottom: 1rem;">NEON ARCADE</h1>
-          <p>Loading Games...</p>
+          <h1 style="font-size: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.05em; font-weight: 800;">NEON ARCADE</h1>
+          <div style="width: 40px; height: 40px; border: 3px solid #00FF00; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1.5rem;"></div>
+          <p style="opacity: 0.6; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">Initializing Systems...</p>
+        </div>
+        <div id="debug-info" style="display: none; margin-top: 2rem; padding: 1rem; background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); border-radius: 8px; max-width: 500px; width: 100%; font-family: monospace; font-size: 12px; overflow-x: auto;">
+          <p style="margin-bottom: 0.5rem; font-weight: bold; border-bottom: 1px solid rgba(255,0,0,0.2); padding-bottom: 0.5rem;">DIAGNOSTIC CONSOLE</p>
         </div>
       </div>
     </div>
-    <script type="module" src="/src/main.jsx"></script>
+    <style>
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script type="module" src="src/main.jsx"></script>
   </body>
 </html>
 
