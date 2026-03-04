@@ -10,8 +10,15 @@ export default function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
-    // In a real app, we might fetch this, but here we import it
-    setGames(gamesData);
+    try {
+      if (gamesData && Array.isArray(gamesData)) {
+        setGames(gamesData);
+      } else {
+        console.error('Neon Arcade: Invalid games data format');
+      }
+    } catch (err) {
+      console.error('Neon Arcade: Error loading games data', err);
+    }
   }, []);
 
   const filteredGames = games.filter(game =>
